@@ -161,6 +161,7 @@ class MLFlowObjectStore(ObjectStore):
                 raise ValueError('A `run_id` cannot be provided without a valid `experiment_id`.')
 
             active_run = mlflow.active_run()
+            log.debug(active_run)
             if active_run is not None:
                 experiment_id = active_run.info.experiment_id
                 run_id = active_run.info.run_id
