@@ -162,7 +162,9 @@ class MLFlowObjectStore(ObjectStore):
             if active_run is not None:
                 experiment_id = active_run.info.experiment_id
                 run_id = active_run.info.run_id
-                log.debug(f'MLFlowObjectStore using active MLflow run {run_id=}')
+                log.debug(f'MLFlowObjectStore using active MLflow run {run_id=} and experiment {experiment_id}')
+                log.debug(f'Using the following workspace {os.getenv("DATABRICKS_HOST")}')
+                log.debug(f'Using the following experiment: Path: {self._mlflow_client.get_experiment(experiment_id).name} ID: {experiment_id}')
             else:
                 # If no active run exists, create a new run for the default experiment.
                 mlflow_env_var_name = mlflow.environment_variables.MLFLOW_EXPERIMENT_NAME.name  # pyright: ignore[reportGeneralTypeIssues]
